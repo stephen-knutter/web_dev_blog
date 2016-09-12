@@ -1,0 +1,21 @@
+{
+  "name": "web dev blog",
+  "description": "blog about web technologies",
+  "main": "",
+  "authors": [
+    "Stephen Knutter <stephen.knutter@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "web",
+    "development"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
