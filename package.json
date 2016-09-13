@@ -15,7 +15,8 @@
     "knex": "^0.11.10",
     "morgan": "~1.7.0",
     "pg": "^6.1.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "sharejs": "^0.1.4"
   },
   "devDependencies": {
     "eslint": "^3.5.0",

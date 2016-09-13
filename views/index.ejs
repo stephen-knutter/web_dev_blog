@@ -23,7 +23,8 @@
           <h3 class="blog-head">How to install Laravel Homestead | The Easy Way</h3>
           <div class="">
             <span class="article-tags">by <span class="underline">Stephen</span> on 2016/09/12 in <span class="tag">Larvel</span> <span class="tag">PHP</span> <span class="tag">Homestead</span> </span>
-            <p class="article-descrip">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <p class="article-descrip" id="pad">
+            </p>
           </div>
         </div>
 
@@ -36,5 +37,44 @@
       <!-- <h1><%= title %></h1>
       <p>Welcome to <%= title %></p> -->
     </div>
+    <script type="text/javascript" src="/bower_components/showdown/dist/showdown.min.js"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+        var converter = new showdown.Converter();
+        var pad = document.getElementById("pad");
+
+        var convertToMarkdown = function() {
+          // var markdownText = pad.value;
+          text = '# Realtime Markdown Editor \n'+
+
+          '### What is this? \n'+
+
+          'Type your markdown into the box on the left and immediately see if on the box on the right. If you send a friend a link to a pad URL (other than the home page) you both can edit the document at the same time! \n'+
+
+          '### How to use this? \n'+
+
+          'Type anything after the slash in "https://realtimemarkdown.herokuapp.com/" and just start creating markdown. If you don\'t feel typing in the address bar, feel free to go to one of these markdown pads: \n'+
+
+          '- [https://realtimemarkdown.herokuapp.com/sample](https://realtimemarkdown.herokuapp.com/sample) \n'+
+          '- [https://realtimemarkdown.herokuapp.com/my_project](https://realtimemarkdown.herokuapp.com/my_project) \n'+
+          '- [https://realtimemarkdown.herokuapp.com/whatever](https://realtimemarkdown.herokuapp.com/whatever) \n'+
+
+          '### How was this built? \n'+
+
+          'This website uses the following to work: \n'+
+
+           '- [Markdown](https://github.com/showdownjs/showdown) - Converts markdown text to beautiful HTML \n'+
+           '- [ShareJS](http://sharejs.org/) - allows for realtime editing of this textbox \n'+
+           '- [Node.js](https://nodejs.org/) - backend framework \n'+
+           '- [Redis](http://redis.io/) - where we store our markdown documents \n'+
+           '- [Twitter Bootstrap](http://getbootstrap.com/) - makes everything a little prettier \n';
+           console.log(text);
+          html = converter.makeHtml(text);
+          pad.innerHTML = html;
+        };
+
+        convertToMarkdown();
+      }
+    </script>
   </body>
 </html>
