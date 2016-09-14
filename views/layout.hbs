@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    {{{body}}}
+  </body>
+
+  <script type="text/javascript" src="/bower_components/showdown/dist/showdown.min.js"></script>
+  <script type="text/javascript">
+    window.onload = function() {
+      var converter = new showdown.Converter();
+      var pad = document.getElementById("pad");
+
+      var convertToMarkdown = function() {
+        // var markdownText = pad.value;
+        text = '# Realtime Markdown Editor \n'+
+
+        '### What is this? \n'+
+
+        'Type your markdown into the box on the left and immediately see if on the box on the right. If you send a friend a link to a pad URL (other than the home page) you both can edit the document at the same time! \n'+
+
+        '### How to use this? \n'+
+
+        'Type anything after the slash in "https://realtimemarkdown.herokuapp.com/" and just start creating markdown. If you don\'t feel typing in the address bar, feel free to go to one of these markdown pads: \n'+
+
+        '- [https://realtimemarkdown.herokuapp.com/sample](https://realtimemarkdown.herokuapp.com/sample) \n'+
+        '- [https://realtimemarkdown.herokuapp.com/my_project](https://realtimemarkdown.herokuapp.com/my_project) \n'+
+        '- [https://realtimemarkdown.herokuapp.com/whatever](https://realtimemarkdown.herokuapp.com/whatever) \n'+
+
+        '### How was this built? \n'+
+
+        'This website uses the following to work: \n'+
+
+         '- [Markdown](https://github.com/showdownjs/showdown) - Converts markdown text to beautiful HTML \n'+
+         '- [ShareJS](http://sharejs.org/) - allows for realtime editing of this textbox \n'+
+         '- [Node.js](https://nodejs.org/) - backend framework \n'+
+         '- [Redis](http://redis.io/) - where we store our markdown documents \n'+
+         '- [Twitter Bootstrap](http://getbootstrap.com/) - makes everything a little prettier \n';
+        html = converter.makeHtml(text);
+        pad.innerHTML = html;
+      };
+
+      convertToMarkdown();
+    }
+  </script>
+</html>

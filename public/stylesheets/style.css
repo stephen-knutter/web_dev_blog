@@ -72,9 +72,45 @@ a.active {
   text-transform: uppercase;
 }
 
-.img-thumbnail{
+.img-thumbnail {
   float: left;
   width: 150px;
   height: 150px;
   margin-right: 10px;
+}
+
+.login-wrap {
+  margin: 10px auto;
+  padding: 0;
+  width: 320px;
+}
+
+.login-control {
+  display: inline-block;
+  border-radius: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #DBDBDB;
+}
+
+.login-control:after{
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: transparent;
+  transition: width: .5s ease, background-color .5s ease;
+}
+
+.login-control:hover:after{
+  width: 100%;
+  background: #76BD1C;
+}
+
+.form-wrap{
+  margin: 5px 0;
 }

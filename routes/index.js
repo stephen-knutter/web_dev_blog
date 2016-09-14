@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var query = require('../database/query');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {title: 'Z Blog'});
+  res.render('index', { title: 'Stephen Knutter', homeClass: "active", archiveClass: "" });
+});
+
+router.get('/login', function(req, res, next){
+  res.render('login', { title: 'Login | Stephen Knutter', homeClass: "", archiveClass: "" });
 });
 
 module.exports = router;

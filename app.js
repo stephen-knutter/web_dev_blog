@@ -1,12 +1,17 @@
 require('dotenv').config();
 
+var crypto = require('crypto');
 var express = require('express');
 var path = require('path');
-// const favicon = require('serve-favicon');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var hbs = require('express-hbs');
+var session = require('express-session');
+var passport = require('./passport');
 
+var LocalStrategy = require('passport-local');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -14,24 +19,39 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'hbs');
+app.engine('hbs', hbs.express3({
+  defaultLayout: __dirname + '/views/layout.hbs',
+  partialsDir: __dirname + '/views/partials',
+  layoutsDir: __dirname + '/views/layout.hbs'
+}))
 
 // uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// Configure express session
+app.use(session({
+  secret: process.env.SECRET,
+  saveUninitialized: true,
+  resave: false
+}));
+
+app.use(passport.initialize());
+
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/bower_components',
-  express.static(path.join(__dirname, '/bower_components')));
+app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
 app.use('/', routes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
+  var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -41,7 +61,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use((err, req, res, next) => {
+  app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -59,5 +79,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 module.exports = app;
